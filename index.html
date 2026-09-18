@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReturnTriage — Reverse Logistics Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand">Return<em>Triage</em></div>
+    <div class="bar-spacer"></div>
+    <button class="toggle" id="eli5btn" aria-pressed="false">
+      <span class="knob"></span> Explain it simply
+    </button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap">
+    <span class="kicker">Product strategy case study · Independent concept · Reverse logistics</span>
+    <h1>A box just came <span class="rev">back</span>. Now what?</h1>
+    <p class="lede">Every online order has a forward journey everyone plans for, and a return journey almost nobody designs. This is a case study about designing the return journey — and building one decision inside it.</p>
+    <div class="hero-meta">
+      <span class="tag">Reverse logistics</span>
+      <span class="tag">Global e-commerce</span>
+      <span class="tag">Fashion &amp; POD</span>
+      <span class="tag">Concept + prototype</span>
+      <span class="tag">Individual project</span>
+    </div>
+
+    <div class="boxstage">
+      <div class="boxstage-q">One returned dress has four possible futures.</div>
+      <div class="boxstage-sub">Picking the wrong one costs money, wastes a garment, or makes an honest customer feel accused. Somebody has to choose — today, mostly by hand.</div>
+      <div class="fates">
+        <div class="fate" data-f="restock"><span class="big">Restock</span>Sell again at full price</div>
+        <div class="fate" data-f="refurb"><span class="big">Refurbish</span>Clean, repair, sell as open-box</div>
+        <div class="fate" data-f="recycle"><span class="big">Recycle</span>Recover the material</div>
+        <div class="fate" data-f="scrap"><span class="big">Scrap</span>Landfill. Full loss.</div>
+      </div>
+      <div class="trackid">RTN-8841-IN · received · awaiting disposition · inspector unassigned</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 30 SECONDS ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">If you only read one thing</div>
+    <h2>Thirty seconds</h2>
+    <div class="eli5"><b>Simply</b>Shops lose a huge amount of money when people send things back. I studied why, made a way of thinking about it, and then built one small tool that helps decide what to do with each returned item.</div>
+    <div class="strip">
+      <div><span class="n">$849.9B</span><span class="l">of US retail sold in 2025 came back — 15.8% of annual sales.</span></div>
+      <div><span class="n">~$30</span><span class="l">spent processing every $100 returned, before counting the lost sale.</span></div>
+      <div><span class="n">25–40%</span><span class="l">return rate for fashion in India — the hardest category, in my home market.</span></div>
+      <div><span class="n">1 decision</span><span class="l">is what I chose to design: what happens to the box, and to the customer.</span></div>
+    </div>
+    <p class="sub" style="margin-top:26px">This case study does four things in order: maps the whole reverse journey, names what breaks in it, offers a framework for thinking about it, then zooms into a single decision and designs it end to end — with a prototype you can actually click.</p>
+  </div>
+</section>
+
+<!-- ============ CONTEXT ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Context</div>
+    <h2>Forward logistics is a line. Reverse logistics is a fork.</h2>
+    <p class="sub">Getting a product to a customer has one destination. Getting it back has four, and no one knows which until someone looks at the item. That single asymmetry explains almost every cost in this case study.</p>
+    <div class="eli5"><b>Simply</b>Sending a toy to a shop is easy — it has one address. When the toy comes back, someone has to open the box and decide if it can be sold again, fixed, melted down, or thrown away. Deciding is the hard part.</div>
+
+    <div class="lanes">
+      <div class="lane fwd">
+        <div class="lane-h"><b>Forward</b><span>predictable, batched, one outcome</span></div>
+        <div class="track">
+          <span class="node">Seller</span><span class="arrow"></span>
+          <span class="node">Warehouse</span><span class="arrow"></span>
+          <span class="node">Courier</span><span class="arrow"></span>
+          <span class="node">Customer</span>
+        </div>
+        <p class="lane-note">Volume is forecast. Items are identical, boxed, and known-good. Cost per unit falls as scale rises.</p>
+      </div>
+      <div class="lane rev">
+        <div class="lane-h"><b>Reverse</b><span>unpredictable, one-by-one, four outcomes</span></div>
+        <div class="track">
+          <span class="node">Customer</span><span class="arrow"></span>
+          <span class="node">Pickup</span><span class="arrow"></span>
+          <span class="node">Return hub</span><span class="arrow"></span>
+          <span class="node">Inspect</span><span class="arrow"></span>
+          <span class="node">One of four fates</span>
+        </div>
+        <p class="lane-note">Volume is a surprise. Every item arrives in a different condition, so every item needs a judgement. Cost per unit stays stubbornly flat no matter how big you get — which is exactly why it is worth designing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY MAP ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The map</div>
+    <h2>Six stages. I designed one of them.</h2>
+    <p class="sub">Click any stage. The dashed stage is where this case study lives — and the scoping discipline of picking one box, rather than claiming the whole chain, is the point.</p>
+    <div class="eli5"><b>Simply</b>A returned parcel goes through six steps before the money comes back. I picked the fourth step — the "someone looks at it and decides" step — and designed that one properly.</div>
+
+    <div class="journey" role="tablist" id="journey"></div>
+    <div class="jdetail" id="jdetail"></div>
+  </div>
+</section>
+
+<!-- ============ TENSION ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">What breaks</div>
+    <h2>Four pressures pulling in opposite directions</h2>
+    <p class="sub">Any returns design that relieves one of these usually worsens another. Speeding up refunds invites fraud. Screening harder punishes honest customers. This tension is the actual product problem.</p>
+    <div class="eli5"><b>Simply</b>Shops want to be quick and kind to customers, but also careful about cheating, cheap to run, and not wasteful. You cannot be best at all four at once, so you have to choose carefully.</div>
+
+    <div class="tension">
+      <div class="tcard">
+        <span class="stat">~$30</span>
+        <h3>Cost: a return is worth less than zero</h3>
+        <p>Processing runs roughly $30 per $100 returned once you stack reverse freight, handling, inspection, repackaging and markdown. On top of that, the original sale reverses. Apparel processing lands around $25–35 per item.</p>
+        <span class="src">Optoro / Pitney Bowes benchmarks, cited 2026</span>
+      </div>
+      <div class="tcard">
+        <span class="stat">19.3%</span>
+        <h3>Delay: online returns run 2–3× in-store</h3>
+        <p>Almost one in five online orders comes back, against roughly 8.7% in physical stores. Volume surges after sale events, and a manual inspection queue is the bottleneck that turns a 2-day refund promise into a 9-day one.</p>
+        <span class="src">NRF &amp; Happy Returns, 2025 Retail Returns Landscape</span>
+      </div>
+      <div class="tcard">
+        <span class="stat">9%</span>
+        <h3>Control: fraud is real, and over-policing is worse</h3>
+        <p>Around 9% of 2025 returns were classified as fraudulent, and 45% of consumers say bending the truth on a return is acceptable. But 71% will avoid a retailer after one bad returns experience — so the cost of wrongly flagging an honest customer is not symmetric.</p>
+        <span class="src">NRF &amp; Happy Returns, 2025</span>
+      </div>
+      <div class="tcard">
+        <span class="stat">9.5B lbs</span>
+        <h3>Climate: the fourth fate is a landfill</h3>
+        <p>An estimated 9.5 billion pounds of returned goods reach US landfills each year. Every item wrongly routed to scrap that could have been restocked is both a financial write-off and an environmental one. The same decision governs both.</p>
+        <span class="src">Optoro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4C ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">My framework</div>
+    <h2>The 4C lens</h2>
+    <p class="sub">I built this to stop myself describing returns and start interrogating them. Every design decision later in this case study traces back to one of these four letters — click one to see the trace.</p>
+    <div class="eli5"><b>Simply</b>I made a checklist with four words — Cost, Customer, Control, Climate. Before deciding anything, I ask what each of the four would say. It stops me forgetting one.</div>
+
+    <div class="cgrid" role="tablist" id="cgrid"></div>
+    <div class="cdetail" id="cdetail"></div>
+  </div>
+</section>
+
+<!-- ============ SCOPE ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Scoping</div>
+    <h2>What I deliberately refused to build</h2>
+    <p class="sub">A first release is defined by its exclusions. Each of these is excluded for a stated reason, not because I ran out of time.</p>
+    <div class="eli5"><b>Simply</b>I wrote down the things I am not doing, and why. That way nobody thinks I forgot them.</div>
+
+    <div class="scope">
+      <div class="scard in">
+        <h3>In the first release</h3>
+        <ul>
+          <li>Eligible, photo-supported customer returns</li>
+          <li>One narrow category: women's apparel</li>
+          <li>One market, one currency, one policy</li>
+          <li>A recommended route, plus a recommended item disposition</li>
+          <li>Prepaid and COD orders, treated differently</li>
+        </ul>
+      </div>
+      <div class="scard out">
+        <h3>Out — and why</h3>
+        <ul>
+          <li><b>Final fraud adjudication.</b> Accusing a customer is a legal and brand decision, not a scoring decision.</li>
+          <li><b>Fully automatic refunds.</b> Money movement without a reversible step is not worth the blast radius in v1.</li>
+          <li><b>Cross-border returns.</b> Duties, reconsignment and consumer-rights regimes differ by country; a single rules engine would quietly get one of them wrong.</li>
+        </ul>
+      </div>
+      <div class="scard later">
+        <h3>Later, if evidence supports it</h3>
+        <ul>
+          <li>Electronics and home, where defects are functional rather than visual</li>
+          <li>A second market, once the first has a clean baseline</li>
+          <li>Preventing returns upstream — sizing, fit, listing accuracy</li>
+        </ul>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:26px"><b>On the word "global":</b> my research was global, my MVP is not — on purpose. India runs roughly 17% returns overall but 25–40% in fashion, with COD return-to-origin between 20% and 40%, against under 15% for prepaid. The US online rate sits near 19.3%. A system tuned on prepaid US apparel would misread an Indian COD festive-season return entirely. Knowing that is the reason to start in one market, not the reason to skip the research.</p>
+  </div>
+</section>
+
+<!-- ============ SIMULATOR ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The product</div>
+    <h2>Two decisions, one photo</h2>
+    <p class="sub">Most returns tools answer "does this customer get their money?" That leaves the expensive half unanswered: <b>what happens to the item?</b> This prototype answers both from the same evidence — and shows its reasoning rather than just its verdict.</p>
+    <div class="eli5"><b>Simply</b>Pick one of the four returned things below and press the button. The tool tells you two things: what the customer is told, and what happens to the item. Try the blurry one — it deliberately refuses to guess.</div>
+
+    <div class="sim">
+      <div class="sim-head">
+        <span class="dot"></span>
+        <b>Triage console</b>
+        <span>— interactive prototype, illustrative scoring</span>
+      </div>
+      <div class="sim-body">
+        <div class="simlabel">1 · Pick an incoming return</div>
+        <div class="cases" role="tablist" id="cases"></div>
+
+        <div class="simlabel">2 · Evidence on file</div>
+        <div class="evidence">
+          <div class="ev">
+            <h4>Order &amp; policy signals</h4>
+            <ul id="evOrder"></ul>
+          </div>
+          <div class="ev">
+            <h4>Submitted photo</h4>
+            <div class="photo" id="evPhoto"></div>
+          </div>
+        </div>
+
+        <button class="runbtn" id="run">Run triage</button>
+
+        <div class="result" id="result">
+          <div class="simlabel">3 · Composite routing score</div>
+          <div class="meter">
+            <div class="band a">0–30 clear</div>
+            <div class="band b">31–65 human review</div>
+            <div class="band c">66–100 verify</div>
+            <div class="needle" id="needle" data-score="0" style="left:0%"></div>
+          </div>
+          <div class="meterkey" id="meterkey"></div>
+
+          <div class="outputs">
+            <div class="out customer">
+              <div class="who">What the customer is told</div>
+              <div class="verdict" id="custV"></div>
+              <p class="why" id="custW"></p>
+              <div class="chips" id="custChips"></div>
+            </div>
+            <div class="out item">
+              <div class="who">What happens to the item</div>
+              <div class="verdict" id="itemV"></div>
+              <p class="why" id="itemW"></p>
+              <div class="chips" id="itemChips"></div>
+            </div>
+          </div>
+
+          <div class="human">
+            <h4>Where a person stays in the loop</h4>
+            <p id="humanP"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">How it would work</div>
+    <h2>Rules first, vision second, human last</h2>
+    <p class="sub">The order matters. Deterministic policy checks run before any model sees anything, so an ineligible return is rejected by a rule, not by a recommendation. Vision only ever describes; it never decides.</p>
+    <div class="eli5"><b>Simply</b>First the computer checks the simple rules, like "is it still within 30 days?" Then it looks at the photo and describes what it sees. Then, if anything is unclear, a real person decides.</div>
+
+    <div class="arch">
+      <div class="abox">
+        <h4>Request</h4>
+        <p>Customer picks the order and reason, uploads a photo with consent, chooses a pickup slot. The screen states what happens next and how long it takes.</p>
+      </div>
+      <div class="achevron">›</div>
+      <div class="abox">
+        <h4>Rules, then vision</h4>
+        <p>Return window, SKU eligibility and payment mode are checked deterministically. Only then does a vision API return a bounded, structured description of visible condition. Unclear evidence is surfaced, not smoothed over.</p>
+      </div>
+      <div class="achevron">›</div>
+      <div class="abox">
+        <h4>Two recommendations</h4>
+        <p>A customer route and an item disposition, each with the reason attached and both logged. Reviewers can override either one; the override is the training signal.</p>
+      </div>
+    </div>
+
+    <div class="warn">
+      <b>What this is not</b>
+      This is a concept and a clickable prototype. No custom model was trained, no labelled dataset was built, no retailer pilot was run, and no accuracy or savings figure is claimed. The score bands above are design guardrails for a conversation with an operations team, not measured thresholds. Stating this plainly is part of the work — a portfolio piece that quietly implies a deployed system fails the first honest question in an interview.
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRADEOFFS ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Trade-offs</div>
+    <h2>Three choices, three prices paid</h2>
+    <p class="sub">Each of these buys something and costs something. Naming the cost is what separates a decision from a preference.</p>
+    <div class="eli5"><b>Simply</b>Every choice I made has a downside. Here they are, written down honestly.</div>
+    <div class="tri">
+      <div class="tcol">
+        <h3>Keep humans in the middle band</h3>
+        <p class="keep">Scores between 31 and 65 always reach a trained reviewer. This is where context, exceptions and appeals live, and where a wrong automated call does the most brand damage.</p>
+        <p class="cost"><b>Price</b>Handling time, headcount, reviewer training, queue visibility and an override log. The middle band is the expensive band by design.</p>
+      </div>
+      <div class="tcol">
+        <h3>Deterministic rules before anything else</h3>
+        <p class="keep">Return windows, SKU eligibility and payment mode are code, not judgement. A customer can be shown the exact clause that governed their outcome.</p>
+        <p class="cost"><b>Price</b>Policy changes need version control and regression tests, and rules alone cannot assess whether a hem is torn or merely creased.</p>
+      </div>
+      <div class="tcol">
+        <h3>Vision as a describer, never a judge</h3>
+        <p class="keep">An existing vision API converts a photo into structured observations that feed a recommendation. No custom model, no training set, no accuracy claim.</p>
+        <p class="cost"><b>Price</b>Image quality varies wildly, vendor behaviour can drift between versions, and per-call cost scales with volume. Poor photos must route to a person, not to a guess.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Design contribution</div>
+    <h2>The customer never sees a score</h2>
+    <p class="sub">All of the machinery above surfaces to a customer as three things: a clear reason, a visible position in the journey, and a way to disagree. Click the tracker to advance it.</p>
+    <div class="eli5"><b>Simply</b>The customer just sees a simple screen: where their parcel is, why the shop decided what it decided, and a button to complain if it feels wrong.</div>
+
+    <div class="designwrap">
+      <div class="phone">
+        <div class="ph-top"><span>9:41</span><span>RTN-8841-IN</span></div>
+        <div class="ph-h">Your return</div>
+        <div class="ph-s">Floral midi dress · size M · ordered 12 Sep</div>
+
+        <div class="ph-card">
+          <div class="pl">Why this outcome</div>
+          <div class="pv">Eligible — within your 30-day window, tags intact</div>
+          <div class="pn">We checked the return window and the photo you sent. Nothing else about your account was used.</div>
+        </div>
+
+        <div class="ph-steps" id="tracker"></div>
+
+        <div class="ph-card" style="margin-top:12px">
+          <div class="pl">Refund</div>
+          <div class="pv">₹2,499 to original payment method</div>
+          <div class="pn">Usually 2–4 working days after the hub scan.</div>
+        </div>
+
+        <button class="phbtn" id="appeal">This doesn't look right</button>
+      </div>
+
+      <div class="dnotes">
+        <div class="dn">
+          <h4>Show the reason, not the algorithm</h4>
+          <p>The card names the specific policy clause that produced the outcome. A customer who understands the reason argues with the policy; a customer who sees only a verdict argues with your support team. One of those is a product problem you can fix.</p>
+        </div>
+        <div class="dn">
+          <h4>Make the reverse journey visible</h4>
+          <p>Forward orders get live tracking; returns usually get silence, and silence generates the "where is my refund" ticket. Pickup → hub → checked → refund is four states, and showing them removes the single most common contact reason in returns support.</p>
+        </div>
+        <div class="dn">
+          <h4>Put the appeal on the same screen as the decision</h4>
+          <p>An appeal route buried in a help centre is a decision with no appeal. Placing it directly under the outcome is a deliberate cost: more appeals, but appeals are a measurable quality signal and a silent, angry customer is not.</p>
+        </div>
+        <div class="dn">
+          <h4>The print-on-demand edge case</h4>
+          <p>A personalised or printed item has no resale value at all — for POD the disposition fork collapses from four outcomes to two, recycle or scrap, and a restock recommendation would be actively wrong. The honest product answer is not smarter triage but a different policy: exchange and reprint by default, refund by exception. It is the clearest example in this project of a case where the right move is to change the policy rather than automate it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALIDATION ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Proof plan</div>
+    <h2>How I would find out I was wrong</h2>
+    <p class="sub">Targets are intentionally blank. Inventing a "40% faster" number without a retailer's baseline would be the least credible thing in this document.</p>
+    <div class="eli5"><b>Simply</b>Before saying this works, I would test it and measure four things. I would also decide in advance what result would make me stop.</div>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Measure</th><th>Baseline needed first</th><th>What the pilot reads out</th><th>Guardrail that stops the rollout</th></tr></thead>
+        <tbody>
+          <tr><td>Cost per return</td><td>Current handling, freight and service cost, split by return type</td><td>Eligible pilot decisions against matched manual cases</td><td>Cost falls because it shifted to the customer as a fee</td></tr>
+          <tr><td>Time to decision</td><td>Request to customer-visible outcome, median and 90th percentile</td><td>Decision time by route, not blended</td><td>Appeal rate or support contacts rise</td></tr>
+          <tr><td>Decision quality</td><td>Reviewer agreement rate and post-inspection outcomes</td><td>Sampled audit of recommendations and every override</td><td>Errors cluster in any one customer segment</td></tr>
+          <tr><td>Recovery rate</td><td>Share of returned units resold at full price today</td><td>Movement between restock, refurbish, recycle and scrap</td><td>Restock rises while customer complaints about condition also rise</td></tr>
+          <tr><td>Policy integrity</td><td>Existing fraud indicators, with written definitions</td><td>Change in flagged cases and manual-review yield</td><td>Legitimate customers are flagged more often than before</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVIDENCE ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Credibility</div>
+    <h2>What is evidence, and what is an opinion</h2>
+    <p class="sub">Separating these two is the section that protects the rest of the document.</p>
+    <div class="eli5"><b>Simply</b>Some things here are proven facts from real reports. Some are my own ideas that still need testing. I have labelled which is which so nobody is misled.</div>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Claim</th><th>Status</th><th>What it rests on / what would make it evidence</th></tr></thead>
+        <tbody>
+          <tr><td>Returns are financially material</td><td><span class="pill done">Sourced</span></td><td>NRF &amp; Happy Returns put 2025 US returns at $849.9B, 15.8% of sales, with online at 19.3%. Used as market context only, not generalised to every retailer.</td></tr>
+          <tr><td>Fashion in India is the hardest case</td><td><span class="pill done">Sourced</span></td><td>Indian fashion returns reported at 25–40%, COD return-to-origin at 20–40% against under 15% prepaid. Supports category and market choice.</td></tr>
+          <tr><td>Processing a return is expensive</td><td><span class="pill done">Sourced</span></td><td>Optoro and Pitney Bowes benchmarks, roughly $30 per $100 returned; apparel processing $25–35 per item. Ranges, not a single figure.</td></tr>
+          <tr><td>The 4C framework</td><td><span class="pill todo">My own lens</span></td><td>An analytical tool I built, useful for structuring decisions. It is not a validated model and I present it as mine.</td></tr>
+          <tr><td>Photo-led triage improves operations</td><td><span class="pill hyp">Hypothesis</span></td><td>Untested. Would need documented test data, sample size, method, model version and measured outcomes against a control.</td></tr>
+          <tr><td>Score bands 0–30 / 31–65 / 66–100</td><td><span class="pill hyp">Design guardrail</span></td><td>A starting point for calibration with an operations team. Not a confidence measurement and not derived from data.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAKEHOLDERS ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Ownership</div>
+    <h2>Six people who can kill this</h2>
+    <p class="sub">Each has a veto. Knowing what they would ask in the first meeting is most of the job.</p>
+    <div class="eli5"><b>Simply</b>Six different teams have to agree before this could be built. Here is what each one cares about.</div>
+    <div class="stake">
+      <div class="sk"><h4>Customer</h4><p>Wants a clear policy, predictable timing and a route to disagree.</p><span class="ask">"Why was I refused?"</span></div>
+      <div class="sk"><h4>Returns operations</h4><p>Owns the review queue, disposition instructions and override consistency.</p><span class="ask">"What does my queue look like on day one?"</span></div>
+      <div class="sk"><h4>Customer support</h4><p>Needs explanation scripts, escalation paths and early sight of complaint spikes.</p><span class="ask">"What do I say when the customer disagrees?"</span></div>
+      <div class="sk"><h4>Finance &amp; merchandising</h4><p>Owns refund rules, the cost baseline and recovery rate on returned stock.</p><span class="ask">"What is the baseline I am being measured against?"</span></div>
+      <div class="sk"><h4>Legal &amp; privacy</h4><p>Owns policy transparency, photo retention, deletion and consumer-rights review.</p><span class="ask">"How long do we keep customer photographs?"</span></div>
+      <div class="sk"><h4>Data &amp; engineering</h4><p>Owns data quality, logging, evaluation, reliability and a rollback path.</p><span class="ask">"How do we turn it off in an hour?"</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUARDRAILS ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Responsible design</div>
+    <h2>Four commitments that cost something</h2>
+    <p class="sub">Framed by the NIST AI Risk Management Framework's emphasis on documentation, human oversight, fairness and monitoring. Each one makes the system slower or more expensive, which is how you can tell it is real.</p>
+    <div class="eli5"><b>Simply</b>Four promises about being fair: a person checks the tricky ones, customers can argue back, we only keep what we need, and we check regularly that the system is not being unfair to any group.</div>
+    <div class="guards">
+      <div class="g"><h4>Human escalation with a written reason</h4><p>Low-confidence, disputed or sensitive cases route to a trained reviewer, and the reason for escalation is recorded. "The model was unsure" is not a reason; "photo showed only packaging" is.</p></div>
+      <div class="g"><h4>Appeals as a first-class path</h4><p>Every outcome shows the governing policy clause and a way to challenge it, on the same screen. Appeal volume is monitored as a quality metric, not as a nuisance.</p></div>
+      <div class="g"><h4>Privacy by design</h4><p>Collect only what the return requires. Retention, access and deletion rules for customer photographs are agreed before launch, not retrofitted after the first complaint.</p></div>
+      <div class="g"><h4>Fairness monitoring on overrides</h4><p>Overrides, appeals and error patterns are reviewed across customer segments. If one group is escalated disproportionately, that is a defect, and it is treated like one.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ READINESS ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Honest status</div>
+    <h2>What is still missing</h2>
+    <p class="sub">The gap between a good case study and a launch-ready one, listed rather than hidden.</p>
+    <div class="eli5"><b>Simply</b>Three things I have not done yet, and what each one would take.</div>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Gate</th><th>Status</th><th>What it takes</th></tr></thead>
+        <tbody>
+          <tr><td>Customer &amp; ops discovery</td><td><span class="pill hyp">Not done</span></td><td>Five to eight interviews across customers, returns operations and support. Capture dates, roles, verbatim quotes and recurring themes. Roughly two weeks.</td></tr>
+          <tr><td>Public policy benchmark</td><td><span class="pill todo">Partly done</span></td><td>Return window, refund speed, pickup model, fee and appeal route for three retailers on one template. Market data gathered; the policy grid still needs building from published sources.</td></tr>
+          <tr><td>Category feasibility review</td><td><span class="pill hyp">Not done</span></td><td>Which damage types and lighting conditions are in scope, and the list of cases that must always route to a person regardless of score.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Q&A ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Appendix</div>
+    <h2>The questions I expect</h2>
+    <p class="sub">Prepared answers to the eight questions this project invites — including the three uncomfortable ones.</p>
+    <div class="eli5"><b>Simply</b>Questions someone might ask me about this project, and my honest answers.</div>
+    <div class="qa" id="qa"></div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section>
+  <div class="wrap">
+    <div class="close-grid">
+      <div>
+        <div class="eyebrow">Why this project</div>
+        <p class="bigq">Everyone talks about how to sell. Very few talk about what happens after.</p>
+        <p>I chose reverse logistics because it sits exactly where operations, customer trust and sustainability collide — which means it cannot be reasoned about from one function alone. It is also under-explored enough that I had to build my own structure rather than borrow someone else's.</p>
+        <p>I started with no prior project experience and no team. What I had to produce myself was the research, the framing, the framework, the scoping decisions, the prototype and the argument for all of it.</p>
+      </div>
+      <div>
+        <div class="eyebrow">What this demonstrates</div>
+        <p><b>Narrowing.</b> I mapped six stages and built one. The discipline to cut scope is visible in the exclusions, each with a stated reason.</p>
+        <p><b>Structure under ambiguity.</b> The 4C lens is mine. It exists because an unstructured topic needed a way to be interrogated rather than described.</p>
+        <p><b>Intellectual honesty.</b> Every claim is labelled sourced, my own, or untested. I would rather be trusted on a smaller claim than doubted on a larger one.</p>
+        <p><b>Communication.</b> From a landfill statistic to a clickable console to a plain-language toggle — the same argument, pitched at whoever is reading.</p>
+        <p style="margin-top:20px"><b>Where my internships connect:</b> business development and campus ambassador work taught me that trust is built at the awkward moments, not the easy ones. In e-commerce, the return is the awkward moment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Independent product strategy case study · Concept and prototype only, no deployed system<br>
+    Market context: NRF &amp; Happy Returns, <em>2025 Retail Returns Landscape</em> · Optoro / Pitney Bowes returns-processing benchmarks · Unicommerce and GoKwik India returns data · Responsible-design framing informed by NIST AI Risk Management Framework 1.0
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
