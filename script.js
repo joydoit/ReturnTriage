@@ -183,7 +183,7 @@ function loadCase(i){
 }
 loadCase(0);
 
-document.getElementById('run').onclick = ()=>{
+function runTriage(scroll){
   const c = CASES[cur], r = document.getElementById('result');
   r.classList.add('on');
   const nd = document.getElementById('needle');
@@ -201,8 +201,12 @@ document.getElementById('run').onclick = ()=>{
   document.getElementById('custChips').innerHTML = c.custChips.map(x=>'<span class="chip">'+x+'</span>').join('');
   document.getElementById('itemChips').innerHTML = c.itemChips.map(x=>'<span class="chip">'+x+'</span>').join('');
   document.getElementById('humanP').textContent = c.human;
-  r.scrollIntoView({behavior:'smooth', block:'nearest'});
-};
+  if (scroll) r.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+document.getElementById('run').onclick = ()=>runTriage(true);
+
+/* Show a result immediately on load — proof the console works even for a skimming reader */
+runTriage(false);
 
 /* ---------------- tracker ---------------- */
 const TSTEPS = [

@@ -19,6 +19,16 @@ meter, the fate cards) is built from HTML/CSS, so the folder is fully
 self-contained apart from two font families loaded from Google Fonts
 (Archivo, Source Serif 4, IBM Plex Mono) over the network.
 
+## Contact details
+
+The byline (sticky bar, hero section, footer) uses:
+- Email: khushivermaux@gmail.com
+- LinkedIn: linkedin.com/in/khushiverma-mba
+- Target roles: Product Manager · International Business Development
+
+To change any of these later, search `index.html` for the email or LinkedIn
+URL — each appears in three places (sticky bar, hero byline, footer).
+
 ## How to use it
 
 **View it locally:** open `index.html` in any modern browser. No build step,
@@ -44,3 +54,6 @@ references `styles.css` and `script.js` by relative path.
 - The only external network dependency is the Google Fonts stylesheet link
   in `index.html`. Everything else — including all four disposition icons,
   the meter, and the phone mockup — is inline HTML/CSS with no images.
+- If a viewer has JavaScript disabled, a `<noscript>` block in the triage
+  console shows a static frozen example so the prototype's intent is still
+  visible.

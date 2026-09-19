@@ -14,7 +14,14 @@
 <div class="bar">
   <div class="bar-in">
     <div class="brand">Return<em>Triage</em></div>
+    <nav class="jumpnav" aria-label="Jump to section">
+      <a href="#sec-summary">Summary</a>
+      <a href="#sec-product">Product</a>
+      <a href="#sec-framework">Framework</a>
+      <a href="#sec-validate">Validate</a>
+    </nav>
     <div class="bar-spacer"></div>
+    <a class="byline-mini" href="mailto:khushivermaux@gmail.com">Khushi Verma ↗</a>
     <button class="toggle" id="eli5btn" aria-pressed="false">
       <span class="knob"></span> Explain it simply
     </button>
@@ -22,7 +29,7 @@
 </div>
 
 <!-- ============ HERO ============ -->
-<div class="hero">
+<div class="hero" id="sec-summary">
   <div class="wrap">
     <span class="kicker">Product strategy case study · Independent concept · Reverse logistics</span>
     <h1>A box just came <span class="rev">back</span>. Now what?</h1>
@@ -33,6 +40,26 @@
       <span class="tag">Fashion &amp; POD</span>
       <span class="tag">Concept + prototype</span>
       <span class="tag">Individual project</span>
+    </div>
+
+    <div class="byline">
+      <div class="byline-name">Khushi Verma</div>
+      <div class="byline-role">Targeting: Product Manager · International Business Development</div>
+      <div class="byline-links">
+        <a href="mailto:khushivermaux@gmail.com">✉ khushivermaux@gmail.com</a>
+        <a href="https://www.linkedin.com/in/khushiverma-mba" target="_blank" rel="noopener">in/khushiverma-mba ↗</a>
+      </div>
+    </div>
+
+    <div class="thirty">
+      <div class="thirty-h">If you only have thirty seconds</div>
+      <div class="strip">
+        <div><span class="n">$849.9B</span><span class="l">of US retail sold in 2025 came back — 15.8% of annual sales.</span></div>
+        <div><span class="n">~$30</span><span class="l">spent processing every $100 returned, before counting the lost sale.</span></div>
+        <div><span class="n">25–40%</span><span class="l">return rate for fashion in India — the hardest category, in my home market.</span></div>
+        <div><span class="n">1 decision</span><span class="l">is what I chose to design: what happens to the box, and to the customer.</span></div>
+      </div>
+      <p class="thirty-sub">This case study maps the whole reverse journey, names what breaks in it, offers a framework for thinking about it, then designs one decision end to end — with a prototype you can click below.</p>
     </div>
 
     <div class="boxstage">
@@ -48,22 +75,6 @@
     </div>
   </div>
 </div>
-
-<!-- ============ 30 SECONDS ============ -->
-<section>
-  <div class="wrap">
-    <div class="eyebrow">If you only read one thing</div>
-    <h2>Thirty seconds</h2>
-    <div class="eli5"><b>Simply</b>Shops lose a huge amount of money when people send things back. I studied why, made a way of thinking about it, and then built one small tool that helps decide what to do with each returned item.</div>
-    <div class="strip">
-      <div><span class="n">$849.9B</span><span class="l">of US retail sold in 2025 came back — 15.8% of annual sales.</span></div>
-      <div><span class="n">~$30</span><span class="l">spent processing every $100 returned, before counting the lost sale.</span></div>
-      <div><span class="n">25–40%</span><span class="l">return rate for fashion in India — the hardest category, in my home market.</span></div>
-      <div><span class="n">1 decision</span><span class="l">is what I chose to design: what happens to the box, and to the customer.</span></div>
-    </div>
-    <p class="sub" style="margin-top:26px">This case study does four things in order: maps the whole reverse journey, names what breaks in it, offers a framework for thinking about it, then zooms into a single decision and designs it end to end — with a prototype you can actually click.</p>
-  </div>
-</section>
 
 <!-- ============ CONTEXT ============ -->
 <section>
@@ -125,7 +136,7 @@
         <span class="stat">~$30</span>
         <h3>Cost: a return is worth less than zero</h3>
         <p>Processing runs roughly $30 per $100 returned once you stack reverse freight, handling, inspection, repackaging and markdown. On top of that, the original sale reverses. Apparel processing lands around $25–35 per item.</p>
-        <span class="src">Optoro / Pitney Bowes benchmarks, cited 2026</span>
+        <span class="src">Optoro / Pitney Bowes benchmarks, 2026 cost-per-item analysis</span>
       </div>
       <div class="tcard">
         <span class="stat">19.3%</span>
@@ -150,7 +161,7 @@
 </section>
 
 <!-- ============ 4C ============ -->
-<section>
+<section id="sec-framework">
   <div class="wrap">
     <div class="eyebrow">My framework</div>
     <h2>The 4C lens</h2>
@@ -168,7 +179,6 @@
     <div class="eyebrow">Scoping</div>
     <h2>What I deliberately refused to build</h2>
     <p class="sub">A first release is defined by its exclusions. Each of these is excluded for a stated reason, not because I ran out of time.</p>
-    <div class="eli5"><b>Simply</b>I wrote down the things I am not doing, and why. That way nobody thinks I forgot them.</div>
 
     <div class="scope">
       <div class="scard in">
@@ -203,12 +213,33 @@
 </section>
 
 <!-- ============ SIMULATOR ============ -->
-<section>
+<section id="sec-product">
   <div class="wrap">
     <div class="eyebrow">The product</div>
     <h2>Two decisions, one photo</h2>
     <p class="sub">Most returns tools answer "does this customer get their money?" That leaves the expensive half unanswered: <b>what happens to the item?</b> This prototype answers both from the same evidence — and shows its reasoning rather than just its verdict.</p>
     <div class="eli5"><b>Simply</b>Pick one of the four returned things below and press the button. The tool tells you two things: what the customer is told, and what happens to the item. Try the blurry one — it deliberately refuses to guess.</div>
+
+    <noscript>
+      <div class="sim">
+        <div class="sim-head"><span class="dot"></span><b>Triage console</b><span>— static preview, JavaScript is off</span></div>
+        <div class="sim-body">
+          <p class="sub" style="margin-bottom:18px">This is a frozen example of one outcome. Enable JavaScript to try the other three returns yourself.</p>
+          <div class="outputs">
+            <div class="out customer">
+              <div class="who">What the customer is told</div>
+              <div class="verdict">Approved — self-service</div>
+              <p class="why">Refund confirmed at pickup scan. Score 12 — clear-case band.</p>
+            </div>
+            <div class="out item">
+              <div class="who">What happens to the item</div>
+              <div class="verdict" style="color:var(--restock)">Restock as new</div>
+              <p class="why">Tags intact, no visible wear, in-season SKU — returns to sellable inventory.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </noscript>
 
     <div class="sim">
       <div class="sim-head">
@@ -233,6 +264,7 @@
         </div>
 
         <button class="runbtn" id="run">Run triage</button>
+        <span class="runhint">Showing the dress case below by default — pick another and run it yourself.</span>
 
         <div class="result" id="result">
           <div class="simlabel">3 · Composite routing score</div>
@@ -307,7 +339,6 @@
     <div class="eyebrow">Trade-offs</div>
     <h2>Three choices, three prices paid</h2>
     <p class="sub">Each of these buys something and costs something. Naming the cost is what separates a decision from a preference.</p>
-    <div class="eli5"><b>Simply</b>Every choice I made has a downside. Here they are, written down honestly.</div>
     <div class="tri">
       <div class="tcol">
         <h3>Keep humans in the middle band</h3>
@@ -334,7 +365,6 @@
     <div class="eyebrow">Design contribution</div>
     <h2>The customer never sees a score</h2>
     <p class="sub">All of the machinery above surfaces to a customer as three things: a clear reason, a visible position in the journey, and a way to disagree. Click the tracker to advance it.</p>
-    <div class="eli5"><b>Simply</b>The customer just sees a simple screen: where their parcel is, why the shop decided what it decided, and a button to complain if it feels wrong.</div>
 
     <div class="designwrap">
       <div class="phone">
@@ -382,12 +412,11 @@
 </section>
 
 <!-- ============ VALIDATION ============ -->
-<section>
+<section id="sec-validate">
   <div class="wrap">
     <div class="eyebrow">Proof plan</div>
     <h2>How I would find out I was wrong</h2>
     <p class="sub">Targets are intentionally blank. Inventing a "40% faster" number without a retailer's baseline would be the least credible thing in this document.</p>
-    <div class="eli5"><b>Simply</b>Before saying this works, I would test it and measure four things. I would also decide in advance what result would make me stop.</div>
     <div class="tblwrap">
       <table class="tbl">
         <thead><tr><th>Measure</th><th>Baseline needed first</th><th>What the pilot reads out</th><th>Guardrail that stops the rollout</th></tr></thead>
@@ -409,7 +438,6 @@
     <div class="eyebrow">Credibility</div>
     <h2>What is evidence, and what is an opinion</h2>
     <p class="sub">Separating these two is the section that protects the rest of the document.</p>
-    <div class="eli5"><b>Simply</b>Some things here are proven facts from real reports. Some are my own ideas that still need testing. I have labelled which is which so nobody is misled.</div>
     <div class="tblwrap">
       <table class="tbl">
         <thead><tr><th>Claim</th><th>Status</th><th>What it rests on / what would make it evidence</th></tr></thead>
@@ -432,7 +460,6 @@
     <div class="eyebrow">Ownership</div>
     <h2>Six people who can kill this</h2>
     <p class="sub">Each has a veto. Knowing what they would ask in the first meeting is most of the job.</p>
-    <div class="eli5"><b>Simply</b>Six different teams have to agree before this could be built. Here is what each one cares about.</div>
     <div class="stake">
       <div class="sk"><h4>Customer</h4><p>Wants a clear policy, predictable timing and a route to disagree.</p><span class="ask">"Why was I refused?"</span></div>
       <div class="sk"><h4>Returns operations</h4><p>Owns the review queue, disposition instructions and override consistency.</p><span class="ask">"What does my queue look like on day one?"</span></div>
@@ -450,7 +477,6 @@
     <div class="eyebrow">Responsible design</div>
     <h2>Four commitments that cost something</h2>
     <p class="sub">Framed by the NIST AI Risk Management Framework's emphasis on documentation, human oversight, fairness and monitoring. Each one makes the system slower or more expensive, which is how you can tell it is real.</p>
-    <div class="eli5"><b>Simply</b>Four promises about being fair: a person checks the tricky ones, customers can argue back, we only keep what we need, and we check regularly that the system is not being unfair to any group.</div>
     <div class="guards">
       <div class="g"><h4>Human escalation with a written reason</h4><p>Low-confidence, disputed or sensitive cases route to a trained reviewer, and the reason for escalation is recorded. "The model was unsure" is not a reason; "photo showed only packaging" is.</p></div>
       <div class="g"><h4>Appeals as a first-class path</h4><p>Every outcome shows the governing policy clause and a way to challenge it, on the same screen. Appeal volume is monitored as a quality metric, not as a nuisance.</p></div>
@@ -466,7 +492,6 @@
     <div class="eyebrow">Honest status</div>
     <h2>What is still missing</h2>
     <p class="sub">The gap between a good case study and a launch-ready one, listed rather than hidden.</p>
-    <div class="eli5"><b>Simply</b>Three things I have not done yet, and what each one would take.</div>
     <div class="tblwrap">
       <table class="tbl">
         <thead><tr><th>Gate</th><th>Status</th><th>What it takes</th></tr></thead>
@@ -486,7 +511,6 @@
     <div class="eyebrow">Appendix</div>
     <h2>The questions I expect</h2>
     <p class="sub">Prepared answers to the eight questions this project invites — including the three uncomfortable ones.</p>
-    <div class="eli5"><b>Simply</b>Questions someone might ask me about this project, and my honest answers.</div>
     <div class="qa" id="qa"></div>
   </div>
 </section>
@@ -515,6 +539,11 @@
 
 <footer>
   <div class="wrap">
+    <div class="footer-byline">
+      <b>Khushi Verma</b> — Product Manager · International Business Development (fresher)
+      · <a href="mailto:khushivermaux@gmail.com">khushivermaux@gmail.com</a>
+      · <a href="https://www.linkedin.com/in/khushiverma-mba" target="_blank" rel="noopener">linkedin.com/in/khushiverma-mba</a>
+    </div>
     Independent product strategy case study · Concept and prototype only, no deployed system<br>
     Market context: NRF &amp; Happy Returns, <em>2025 Retail Returns Landscape</em> · Optoro / Pitney Bowes returns-processing benchmarks · Unicommerce and GoKwik India returns data · Responsible-design framing informed by NIST AI Risk Management Framework 1.0
   </div>
