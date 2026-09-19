@@ -21,13 +21,21 @@ self-contained apart from two font families loaded from Google Fonts
 
 ## Contact details
 
-The byline (sticky bar, hero section, footer) uses:
-- Email: khushivermaux@gmail.com
-- LinkedIn: linkedin.com/in/khushiverma-mba
-- Target roles: Product Manager · International Business Development
+A byline appears in exactly two places — the hero section (near the top)
+and the footer — each formatted as:
 
-To change any of these later, search `index.html` for the email or LinkedIn
-URL — each appears in three places (sticky bar, hero byline, footer).
+```
+Khushi Verma
+MBA, International Business · Targeting Product Management
+khushivermaux@gmail.com · linkedin.com/in/khushiverma-mba
+```
+
+There is no longer a byline in the sticky top bar — it was removed to
+avoid a stray, easy-to-miss contact link; the hero and footer are the two
+deliberate, well-formatted contact points.
+
+To update any of these later, search `index.html` for the email or
+LinkedIn URL — each appears once in the hero and once in the footer.
 
 ## How to use it
 

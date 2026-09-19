@@ -92,12 +92,7 @@ section:first-of-type{border-top:0}
   font-family:Archivo;font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;white-space:nowrap;
 }
 .jumpnav a:hover{color:var(--reverse)}
-.byline-mini{
-  font-family:Archivo;font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;white-space:nowrap;margin-right:4px;
-}
-.byline-mini:hover{color:var(--reverse)}
 @media (max-width:860px){ .jumpnav{display:none} }
-@media (max-width:560px){ .byline-mini{display:none} }
 .toggle{
   display:flex;align-items:center;gap:9px;cursor:pointer;
   font-family:Archivo;font-size:13px;font-weight:600;color:var(--ink-soft);
@@ -134,14 +129,14 @@ h1 .rev{color:var(--reverse)}
 
 /* byline */
 .byline{
-  display:flex;align-items:center;flex-wrap:wrap;gap:4px 14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:4px;margin-top:26px;padding-top:22px;border-top:1px solid var(--rule);
 }
-.byline-name{font-family:Archivo;font-weight:800;font-size:16px;letter-spacing:-0.01em}
+.byline-name{font-family:Archivo;font-weight:800;font-size:17px;letter-spacing:-0.01em}
 .byline-role{font-size:14.5px;color:var(--ink-soft);font-family:Archivo;font-weight:500}
-.byline-links{display:flex;gap:14px;margin-left:auto}
+.byline-links{display:flex;align-items:center;gap:8px;margin-top:2px}
 .byline-links a{font-family:Archivo;font-size:13.5px;font-weight:600;color:var(--reverse);text-decoration:none}
 .byline-links a:hover{text-decoration:underline}
-@media (max-width:640px){ .byline-links{margin-left:0} }
+.byline-dot{color:var(--ink-faint);font-size:13.5px}
 
 /* thirty-second summary, promoted above the box animation */
 .thirty{margin-top:30px}
@@ -425,10 +420,13 @@ body.simple .eli5{display:block}
 .close-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
 .bigq{font-family:Archivo;font-size:clamp(22px,3.4vw,32px);font-weight:900;letter-spacing:-0.025em;line-height:1.15;margin-bottom:18px}
 footer{padding:44px 0 66px;border-top:1px solid var(--rule);font-size:14.5px;color:var(--ink-faint);font-family:Archivo}
-.footer-byline{font-size:15px;color:var(--ink-soft);margin-bottom:14px}
-.footer-byline b{color:var(--ink);font-weight:800}
-.footer-byline a{color:var(--reverse);text-decoration:none}
-.footer-byline a:hover{text-decoration:underline}
+.footer-byline{margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--rule)}
+.fb-name{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin-bottom:4px}
+.fb-role{font-size:15px;color:var(--ink-soft);font-weight:500;margin-bottom:8px}
+.fb-contact{display:flex;align-items:center;gap:8px}
+.fb-contact a{font-size:14px;font-weight:600;color:var(--reverse);text-decoration:none}
+.fb-contact a:hover{text-decoration:underline}
+.fb-meta{font-family:"Source Serif 4",serif;font-size:14.5px;color:var(--ink-faint);line-height:1.6}
 footer a{color:var(--ink-soft)}
 
 /* ---------- responsive ---------- */
