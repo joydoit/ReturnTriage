@@ -220,6 +220,22 @@
     <p class="sub">Most returns tools answer "does this customer get their money?" That leaves the expensive half unanswered: <b>what happens to the item?</b> This prototype answers both from the same evidence — and shows its reasoning rather than just its verdict.</p>
     <div class="eli5"><b>Simply</b>Pick one of the four returned things below and press the button. The tool tells you two things: what the customer is told, and what happens to the item. Try the blurry one — it deliberately refuses to guess.</div>
 
+    <div class="scorebox">
+      <div class="scorebox-h">
+        <span class="sb-title">How the score is actually calculated</span>
+        <span class="sb-note">Five weighted factors, summed to a number from 0–100. No factor alone can approve a return — but one factor alone can force it to verification.</span>
+      </div>
+      <div class="sb-grid">
+        <div class="sb-row"><b>Return-window position</b><span>Early (day 1–15) <em>+4</em> · Mid (16–24) <em>+14</em> · Late (25–30) <em>+22</em></span></div>
+        <div class="sb-row"><b>Payment mode</b><span>Prepaid <em>+0</em> · Cash on delivery <em>+14</em></span></div>
+        <div class="sb-row"><b>Return frequency (90 days)</b><span>0–1 returns <em>+0</em> · 2–3 <em>+8</em> · 4 or more <em>+14</em></span></div>
+        <div class="sb-row highlight"><b>Photo evidence</b><span>Clear &amp; assessable <em>+0</em> · Visible wear/damage <em>+20</em> · Item not visible <em>+55</em></span></div>
+        <div class="sb-row"><b>Order value tier</b><span>Under ₹3,000 <em>+0</em> · ₹3,000–7,000 <em>+5</em> · Over ₹7,000 <em>+10</em></span></div>
+        <div class="sb-row override"><b>Override — confirmed retailer defect</b><span>Routes to the defect path regardless of score. This is the retailer's error, not a risk to assess.</span></div>
+      </div>
+      <p class="sb-foot">Weights are mine, not learned — this is a transparent v1 heuristic, not a trained model, so every number on this page can be explained by a person, not just predicted by one. Click "Run triage" below to see the actual breakdown for each case.</p>
+    </div>
+
     <noscript>
       <div class="sim">
         <div class="sim-head"><span class="dot"></span><b>Triage console</b><span>— static preview, JavaScript is off</span></div>
@@ -229,7 +245,7 @@
             <div class="out customer">
               <div class="who">What the customer is told</div>
               <div class="verdict">Approved — self-service</div>
-              <p class="why">Refund confirmed at pickup scan. Score 12 — clear-case band.</p>
+              <p class="why">Refund confirmed at pickup scan. Score 4 — clear-case band.</p>
             </div>
             <div class="out item">
               <div class="who">What happens to the item</div>
@@ -275,6 +291,7 @@
             <div class="needle" id="needle" data-score="0" style="left:0%"></div>
           </div>
           <div class="meterkey" id="meterkey"></div>
+          <div class="meterbreak" id="meterbreak"></div>
 
           <div class="outputs">
             <div class="out customer">
@@ -432,6 +449,47 @@
   </div>
 </section>
 
+<!-- ============ UNIT ECONOMICS ============ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">For finance</div>
+    <h2>The napkin math a CFO asks for first</h2>
+    <p class="sub">I don't have a real retailer's numbers, so I'm not going to pretend I do. What follows is illustrative arithmetic, built from the same assumptions already stated elsewhere in this case study — the target-buyer profile and the cited return-rate and processing-cost ranges — so a finance stakeholder has a number to react to, correct, and replace with their own.</p>
+
+    <div class="assump">
+      <b>Assumptions used below — all stated, all swappable</b>
+      <div class="achip">Mid-size fashion e-commerce retailer, ~15,000 orders/month</div>
+      <div class="achip">30% category return rate — the middle of the 25–40% India-fashion range cited earlier</div>
+      <div class="achip">₹2,100 average cost to process one return — in line with the $25–35 apparel-processing benchmark cited earlier</div>
+      <div class="achip">35% of returns land in the clear band under the scoring model above — an assumption, not a measurement</div>
+    </div>
+
+    <div class="ledger">
+      <div class="lrow">
+        <div class="lstep">1</div>
+        <div class="ldesc"><b>Baseline volume &amp; cost</b>15,000 orders × 30% return rate = <b class="lval">4,500 returns/month</b>, at ₹2,100 each = <b class="lval">₹94.5 lakh/month</b> (≈ ₹11.3 crore, or roughly $1.35M, a year)</div>
+      </div>
+      <div class="lrow">
+        <div class="lstep">2</div>
+        <div class="ldesc"><b>Clear-band volume</b>4,500 × 35% = <b class="lval">1,575 returns/month</b> skip manual inspection entirely and route on self-service</div>
+      </div>
+      <div class="lrow">
+        <div class="lstep">3</div>
+        <div class="ldesc"><b>Labor saved on that band</b>Of the ₹2,100 total per-return cost, an illustrative ₹380 is the manual inspection &amp; routing-decision step specifically — the piece this system actually removes. 1,575 × ₹380 = <b class="lval">≈ ₹5.98 lakh/month</b> (≈ ₹71.8 lakh, or roughly $85K, a year)</div>
+      </div>
+      <div class="lrow final">
+        <div class="lstep">=</div>
+        <div class="ldesc"><b>As a share of total return-processing cost</b>₹5.98L ÷ ₹94.5L ≈ <b class="lval">6.3%</b> — a deliberately modest, lower-bound figure</div>
+      </div>
+    </div>
+
+    <div class="caveat">
+      <b>What this doesn't count</b>
+      This is inspection labor only. It excludes faster refunds improving repeat-purchase rate, fewer write-offs from correct disposition routing (restock vs. scrap — likely the larger lever, per the Cost card earlier), and reduced fraud-review cost. All plausibly larger than 6.3%, all unquantified here on purpose — I'd rather hand a finance stakeholder a defensible small number than an impressive invented one.
+    </div>
+  </div>
+</section>
+
 <!-- ============ EVIDENCE ============ -->
 <section>
   <div class="wrap">
@@ -510,7 +568,7 @@
   <div class="wrap">
     <div class="eyebrow">Appendix</div>
     <h2>The questions I expect</h2>
-    <p class="sub">Prepared answers to the eight questions this project invites — including the three uncomfortable ones.</p>
+    <p class="sub">Prepared answers to the nine questions this project invites — including the four uncomfortable ones.</p>
     <div class="qa" id="qa"></div>
   </div>
 </section>

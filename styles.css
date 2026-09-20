@@ -259,6 +259,21 @@ body.simple .eli5{display:block}
 .scard.later{border-top:4px solid var(--forward)}
 
 /* ---------- SIMULATOR ---------- */
+.scorebox{border:1px solid var(--rule);border-radius:10px;background:var(--card);padding:22px 24px;margin-bottom:22px}
+.scorebox-h{margin-bottom:16px}
+.sb-title{font-family:Archivo;font-size:15px;font-weight:800;color:var(--ink);display:block;margin-bottom:4px}
+.sb-note{font-size:14.5px;color:var(--ink-soft)}
+.sb-grid{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
+.sb-row{display:grid;grid-template-columns:220px 1fr;gap:14px;padding:11px 0;border-bottom:1px dotted var(--rule);font-size:14.5px;align-items:baseline}
+.sb-row b{font-family:Archivo;font-size:13.5px;font-weight:700;color:var(--ink)}
+.sb-row span{color:var(--ink-soft)}
+.sb-row em{font-style:normal;font-family:Archivo;font-weight:700;color:var(--reverse)}
+.sb-row.highlight{background:var(--reverse-soft);margin:0 -24px;padding:11px 24px;border-bottom:1px dotted var(--rule)}
+.sb-row.override{border-bottom:0}
+.sb-row.override b{color:var(--scrap)}
+.sb-foot{font-size:13.5px;color:var(--ink-faint);margin:14px 0 0;font-style:italic}
+@media (max-width:640px){ .sb-row{grid-template-columns:1fr;gap:3px} .sb-row.highlight{margin:0 -14px;padding:11px 14px} }
+
 .sim{border:2px solid var(--ink);border-radius:12px;background:var(--card);overflow:hidden}
 .sim-head{padding:18px 22px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .sim-head b{font-family:Archivo;font-size:15px;font-weight:800}
@@ -306,7 +321,9 @@ body.simple .eli5{display:block}
   font-family:Archivo;font-size:12px;font-weight:800;background:var(--ink);color:var(--paper);
   padding:2px 6px;border-radius:4px;
 }
-.meterkey{font-size:14px;color:var(--ink-faint);font-family:Archivo;font-weight:500;margin-bottom:22px}
+.meterkey{font-size:14px;color:var(--ink-faint);font-family:Archivo;font-weight:500;margin-bottom:10px}
+.meterbreak{font-size:13px;color:var(--ink-soft);margin-bottom:22px;line-height:1.7;padding:10px 12px;background:var(--paper);border:1px solid var(--rule);border-radius:6px}
+.meterbreak b{color:var(--reverse);font-family:Archivo}
 
 .outputs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
 .out{border:1px solid var(--rule);border-radius:8px;padding:18px;background:var(--paper)}
@@ -400,6 +417,23 @@ body.simple .eli5{display:block}
 .g p{font-size:16px;color:var(--ink-soft);margin:0}
 
 /* ---------- accordion ---------- */
+/* unit economics */
+.assump{border:1px solid var(--rule);border-radius:9px;background:var(--card);padding:18px 20px;margin-bottom:22px}
+.assump b{display:block;font-family:Archivo;font-size:12.5px;font-weight:700;color:var(--ink-faint);margin-bottom:10px;text-transform:uppercase;letter-spacing:.03em}
+.achip{display:inline-block;font-size:14px;color:var(--ink-soft);padding:7px 12px;margin:0 8px 8px 0;border:1px solid var(--rule);border-radius:6px;background:var(--paper)}
+.ledger{border:1px solid var(--rule);border-radius:9px;overflow:hidden;margin-bottom:20px}
+.lrow{display:flex;gap:16px;padding:16px 20px;background:var(--card);border-bottom:1px solid var(--rule);align-items:flex-start}
+.lrow:last-child{border-bottom:0}
+.lrow.final{background:var(--reverse-soft)}
+.lstep{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--ink-faint);color:var(--ink-faint);
+  display:flex;align-items:center;justify-content:center;font-family:Archivo;font-weight:700;font-size:13px;margin-top:2px}
+.lrow.final .lstep{border-color:var(--reverse);color:var(--reverse)}
+.ldesc{font-size:15.5px;color:var(--ink-soft)}
+.ldesc b:first-child{display:block;font-family:Archivo;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.ldesc .lval{color:var(--reverse);font-family:Archivo;font-weight:700}
+.caveat{border-left:3px solid var(--ink-faint);background:var(--card);padding:14px 18px;border-radius:0 8px 8px 0;font-size:14.5px;color:var(--ink-soft)}
+.caveat b{display:block;font-family:Archivo;font-size:12.5px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px}
+
 .qa{border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--card)}
 .qitem{border-bottom:1px solid var(--rule)}
 .qitem:last-child{border-bottom:0}

@@ -103,13 +103,40 @@ function drawC(i){
 drawC(0);
 
 /* ---------------- simulator ---------------- */
+/* ---------------- transparent scoring engine ---------------- */
+const WEIGHTS = {
+  window:  {early:4, mid:14, late:22},
+  payment: {prepaid:0, cod:14},
+  freq:    {low:0, mid:8, high:14},
+  photo:   {clear:0, wear:20, insufficient:55},
+  value:   {low:0, mid:5, high:10}
+};
+const WLABEL = {
+  window: {early:'return window: early (day 1–15)', mid:'return window: mid (day 16–24)', late:'return window: late (day 25–30)'},
+  payment:{prepaid:'payment: prepaid', cod:'payment: cash on delivery'},
+  freq:   {low:'return frequency: 0–1 in 90 days', mid:'return frequency: 2–3 in 90 days', high:'return frequency: 4+ in 90 days'},
+  photo:  {clear:'photo: clear & assessable', wear:'photo: visible wear/damage', insufficient:'photo: item not visible'},
+  value:  {low:'order value: under ₹3,000', mid:'order value: ₹3,000–7,000', high:'order value: over ₹7,000'}
+};
+function computeScore(f){
+  const parts = [
+    ['window', WEIGHTS.window[f.window], WLABEL.window[f.window]],
+    ['payment', WEIGHTS.payment[f.payment], WLABEL.payment[f.payment]],
+    ['freq', WEIGHTS.freq[f.freq], WLABEL.freq[f.freq]],
+    ['photo', WEIGHTS.photo[f.photo], WLABEL.photo[f.photo]],
+    ['value', WEIGHTS.value[f.value], WLABEL.value[f.value]]
+  ];
+  const total = Math.min(100, parts.reduce((s,p)=>s+p[1],0));
+  return {total, parts};
+}
+
 const CASES = [
   {
     item:'Floral midi dress',
     ctx:'₹2,499 · returned day 6 · prepaid',
     order:['Within 30-day window (day 6)','Prepaid order','First return in 12 months','SKU eligible, in season','Reason given: size too large'],
     photo:'Clear, well-lit photo. Garment flat on a plain surface. Original tags visible and attached. No visible marks or wear.',
-    score:12,
+    factors:{window:'early', payment:'prepaid', freq:'low', photo:'clear', value:'low'},
     custV:'Approved — self-service',
     custW:'Refund confirmed at pickup scan. The customer sees the clause that governed it and an appeal link they will not need.',
     custChips:['No wait for inspection','Reason shown','Appeal available'],
@@ -124,7 +151,7 @@ const CASES = [
     ctx:'₹6,200 · returned day 24 · prepaid',
     order:['Day 24 of 30 — near window edge','Prepaid order','4th return in 90 days','High-value SKU','Reason given: uncomfortable'],
     photo:'Adequate photo. Visible scuffing on the outsole and creasing across the upper. Consistent with outdoor wear rather than a single try-on.',
-    score:58,
+    factors:{window:'mid', payment:'prepaid', freq:'high', photo:'wear', value:'mid'},
     custV:'Held for review — 24 hours',
     custW:'The customer is told a person is checking, and by when. Nothing is refused, and no accusation is implied or recorded on the account.',
     custChips:['Named timeframe','No accusation','Human decides'],
@@ -139,7 +166,7 @@ const CASES = [
     ctx:'₹8,900 · returned day 11 · COD',
     order:['Within window (day 11)','Cash on delivery','High-value electronics','Two prior COD returns','Reason given: not working'],
     photo:'Insufficient. Photo shows the sealed outer box only. The item itself is not visible, so no condition assessment is possible.',
-    score:74,
+    factors:{window:'early', payment:'cod', freq:'mid', photo:'insufficient', value:'high'},
     custV:'One more photo needed',
     custW:'The request is specific and actionable: a photo of the item itself. The customer is told exactly what is missing and why, not simply that their return is "under review".',
     custChips:['Specific ask','Clock paused','Not a refusal'],
@@ -154,7 +181,8 @@ const CASES = [
     ctx:'₹999 · returned day 5 · prepaid',
     order:['Within window (day 5)','Prepaid order','Personalised print — made to order','Supplier defect flag raised','Reason given: print misaligned'],
     photo:'Clear photo. Print is visibly offset from centre by roughly 3cm. Garment itself is unworn with tags attached.',
-    score:22,
+    factors:{window:'early', payment:'prepaid', freq:'low', photo:'clear', value:'low'},
+    defectOverride:true,
     custV:'Approved — defect path',
     custW:'A defect is the retailer\u2019s error, so this skips the standard route entirely: immediate refund or a free reprint, customer\u2019s choice, with no return window applied.',
     custChips:['Retailer at fault','Reprint offered','No window check'],
@@ -185,14 +213,18 @@ loadCase(0);
 
 function runTriage(scroll){
   const c = CASES[cur], r = document.getElementById('result');
+  const { total, parts } = computeScore(c.factors);
   r.classList.add('on');
   const nd = document.getElementById('needle');
   nd.style.left='0%'; nd.dataset.score='0';
-  requestAnimationFrame(()=>{ setTimeout(()=>{ nd.style.left=c.score+'%'; nd.dataset.score=c.score; },40); });
-  const band = c.score<=30 ? 'clear-case band — routed without waiting for a person'
-             : c.score<=65 ? 'human-review band — a trained reviewer decides'
+  requestAnimationFrame(()=>{ setTimeout(()=>{ nd.style.left=total+'%'; nd.dataset.score=total; },40); });
+  const band = total<=30 ? 'clear-case band — routed without waiting for a person'
+             : total<=65 ? 'human-review band — a trained reviewer decides'
              : 'verification band — more evidence required before any decision';
-  document.getElementById('meterkey').textContent = 'Score '+c.score+' · '+band;
+  document.getElementById('meterkey').textContent = 'Score '+total+' · '+band;
+  const breakdown = parts.map(p=>p[2]+' <b>+'+p[1]+'</b>').join(' &nbsp;·&nbsp; ');
+  document.getElementById('meterbreak').innerHTML = breakdown +
+    (c.defectOverride ? ' &nbsp;·&nbsp; <b style="color:var(--scrap)">defect override active — routed on defect grounds regardless of score</b>' : '');
   document.getElementById('custV').textContent = c.custV;
   document.getElementById('custW').textContent = c.custW;
   document.getElementById('itemV').textContent = c.itemV;
@@ -250,7 +282,9 @@ const QA = [
   ['How would you know this failed?',
    'I would watch four guardrails more closely than the headline metrics: cost falling only because it was shifted to customers as a fee; appeal rate or support contacts rising; errors clustering in one customer segment; and restock rate rising while complaints about item condition rise with it. Any of those means the system is producing a better number and a worse outcome, and I would stop the rollout on it.'],
   ['You built this alone with no prior project experience. What does that say about you in a team?',
-   'It says I can take a topic with no given structure and produce a defensible one — research, framework, scope, prototype and the argument tying them together — without being handed a brief. In a team I would expect to be corrected on the operational reality, which I have only read about rather than lived, and I would want that early. What I would bring is the ability to turn a messy area into something a group can actually argue about, and the habit of labelling what is proven versus what is still my opinion.']
+   'It says I can take a topic with no given structure and produce a defensible one — research, framework, scope, prototype and the argument tying them together — without being handed a brief. In a team I would expect to be corrected on the operational reality, which I have only read about rather than lived, and I would want that early. What I would bring is the ability to turn a messy area into something a group can actually argue about, and the habit of labelling what is proven versus what is still my opinion.'],
+  ['Your own POD section admits prevention beats triage for size/fit returns. Why build triage instead of fixing that upstream?',
+   'Because they solve different problems on different timelines, and a team building only one of them is making a bet, not missing an obvious answer. Preventing a bad-fit purchase — better size guides, fit-prediction, clearer photos — attacks the return before it happens, and for pure sizing mismatches it is probably the bigger lever long-term. But prevention only ever reduces the rate; it never reaches zero, and it does nothing for the returns that still arrive — damaged items, wrong sends, changed minds, fraud. Triage is the system that has to exist regardless of how good prevention gets, and it is buildable and testable in weeks against data the company already has, where a fit-prediction model needs sizing and body-shape data most retailers do not yet collect cleanly. My honest sequencing: triage first, because it is the faster path to a working pilot and it generates the override data — which returns were actually bad fits versus damage versus fraud — that a prevention model would need as training data anyway. Prevention is the next case study, and it inherits evidence this one produces. I would not defend triage as the better long-term investment; I would defend it as the right first move.']
 ];
 const qa = document.getElementById('qa');
 QA.forEach((q,i)=>{
